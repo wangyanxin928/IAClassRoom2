@@ -1,0 +1,130 @@
+@charset "utf-8";
+html,body{width: 100%;height: 100%;}
+header{padding: 10px;font-size: 2.4rem;}
+/*.btn-default:hover,.btn-default:active,.btn-default:focus{background-color: #2dcad9;border-color: #ffffff;color: #ffffff;}*/
+.text-white{color: #FFFFFF;}
+.text-black{color: #333333;}
+.bg-white{background-color: #FFFFFF;}
+.bg-lightBlue{background-color: #2dcad9;}
+.bg-gray{background-color: #eeeeee;}
+.line{width: 100%;height: 2px; background-color:#cee4fa}
+
+.btn-lightBlue{opacity: 0.8;  color: #05d8ef;}
+
+.p16{padding: 16px;}
+.padding1{padding: 0.5rem;}
+
+.margin-auto{margin: auto;}
+.margin-top2{margin-top: 2rem!important;}
+.margin-top10{margin-top: 10rem;}
+.content{height: 100%;width: 100%;}
+
+table thead th, table tbody td{text-align: center;font-size: 1.7rem;vertical-align: middle!important;}
+tbody tr:nth-child(odd){background:#f4f4f4;}
+
+
+
+.mui-btn-lightreen{color: #fff;background-color: #2dcad9;border: 1px solid #2dcad9;}
+
+/* 首页start*/
+.homePage{width: 100%;height: 100%;background-color: #2dcad9;}
+.homePage .logo{position: fixed;left: 50%;top: 26%;margin-left: -50px;}
+.logo{width:8rem;height: 8rem;background-color: #085a61;border: 1px solid #085a61;border-radius: 5px;padding: 5px;margin: auto;}
+.logo .logoText{color: #FFFFFF;font-size: 2.5rem;font-family: "comic sans ms";display: inline-block;width: 5rem;float: left;    line-height: 3rem;margin-top: 3rem;}
+.logo .logoSubtitle{display: inline-block;color: #085a61;border: #FFFFFF;background-color: #FFFFFF;font-size: 1rem;line-height: 1.7rem;text-align: center;border: 1px solid #999999;border-radius: 5px;padding: 3px;}
+.logo .logoSubtitle p{margin-bottom: 0px;}
+.logo .logoBpttomText{font-size: 1rem;text-align: right;color: #ffffff;}
+.homePageSlogan{color: #FFFFFF;font-size: 2rem;position: fixed;top: 60%;left: 50%;margin-left: -11rem;}
+.homePageBottom{color: #ffffff;font-size: 1rem;position: fixed;bottom: 3%;left: 50%;margin-left: -8.5rem;}
+
+/*首页end*/
+
+/*登陆／注册选择页 start*/
+#landIng{width: 100%;height: 100%;min-height: 100%;background-image: url(../images/landIngBg.jpg);background-repeat: no-repeat;background-size: 100% 100%;}
+#landIngTeacher{width: 100%;height: 100%;min-height: 100%;background-image: url(../images/landIngBg2.jpg);background-repeat: no-repeat;background-size: 100% 100%;}
+#landIng .logo, #landIngTeacher .logo{position: fixed;left: 50%;top: 15%;margin-left: -50px;}
+#landIng .landIngBtnBox,#landIngTeacher .landIngBtnBox{position: fixed;width: 100%;bottom: 10%;}
+/*登陆／注册页 end*/
+#logoIngBg{  position: relative;width: 100%;height: 100%;min-height: 100%;background-image: url(../images/landIngBg3.jpg);background-repeat: no-repeat;background-size: 100% 100%;}
+#logoIngBg .logoIngBox{ position: relative;  top: 40%;   background-color: rgba(255, 255, 255, 0.78);  width: 60%;  margin: auto;  padding: 20px;  border-radius: 10px;margin-top: 2rem;}
+/*信息注册页start*/
+
+/*信息注册页 end*/
+
+/*主页start*/
+
+/*主页end*/
+
+
+/*选择年级 start*/
+.gradeList .col-sm-3,.gradeList .col-xs-4{margin: 0.5rem 0;}
+/*选择年级 edn*/
+/*选择学科start*/
+.courseList{margin-top: 1rem;}
+.courseList .col-sm-3,.gradeList .col-xs-4{margin: 1rem 0;}
+.courseList .courseBtn{background-color: #ffffff;padding: 1rem;}
+.courseList img{display: block;width: 60%;height: 60%;margin: auto;border: 1px solid #fff;  border-radius: 50%;}
+.courseBtn:hover,.courseBtn:active,.courseBtn:focus{background-color: #2dcad9;color: #FFFFFF;}
+
+/*选择学科end*/
+/*学员分组start*/
+#grouping .groupList,#grouping .studentList ,.addedList{height: 25rem;overflow: auto;}
+
+.groupList button,.studentList button,.addedList button {margin: 1rem 0;}
+.groupList .btn{border: 0px;  border-left: 3px solid #FFFFFF;  border-radius: 0px;}
+.groupList .btn div{font-size: 1.2rem;}
+.groupList .btn div span{color: #2dcad9;padding: 0px 3px;}
+/*.addedList{height: 20rem;}*/
+.addedList button span{float: right;}
+
+/*学员分组end*/
+
+/*上可情况下的桌列表start*/
+#groupingList{}
+#groupingList .studentList{background-color:#fafcff;border: 1px solid #d7eafd; height: 40rem;}
+#groupingList .groupName{height: 4rem;  width:100%; font-size: 2rem;line-height: 4rem;}
+#groupingList .studentInfo{overflow: visible;}
+#groupingList .studentInfo .studentPortrait{display: block;  width: 6rem;height: 6rem;border-radius: 50%;border: 2px solid #fafcff;float: left;}
+
+#groupingList .studentInfo .studentName{display: block;line-height: 6rem;font-size:17px;float: left;margin-left: 10px;}
+/*组长start*/
+#groupingList .studentInfo .leader .leaderIcon{position: absolute;top: 6px;border: 1px solid #7ed3fc;background-color:#e5f5fe;color: #1bb8fa; border-radius: 3px;padding: 0px 8px;margin-left: 10px;}
+#groupingList .studentInfo .leader .studentName{display: block; position: relative;  top: 10px;}
+/*组长end*/
+/*选中状态 start*/
+#groupingList .studentInfo .active .studentPortrait{border-color: #2dcad9;}
+#groupingList .studentInfo .active  .studentName{color:#2dcad9; }
+    /*选中状态 end*/
+
+/*点名弹出内容 start*/
+ #rollCallScoreBox{display: none;}
+
+/*点名弹出内容 end*/
+.rollCallBox {overflow: visible; padding-bottom: 3rem;}
+.rollCallBox .studentPortrait {width: 10rem;height: 10rem;border-radius: 50%;float: left;}
+.rollCallBox .studentInfo{float: left;margin-left: 20px;margin-top: 40px;}
+.rollCallBox .studentInfo .studentName {display: block;font-size: 2rem;}
+.rollCallBox .studentInfo .leaderIcon {display: block;font-size: 1.5rem;color:#1bb8fa;}
+
+/*上可情况下的桌列表end*/
+
+/*课堂活跃信息 start*/
+#activeInfo{ background-color: #FFFFFF;overflow: auto; top: 0px;margin: 1.5rem;}
+#activeInfo .goodActiveInfo{margin-top: 4rem;}
+#activeInfo .goodActiveInfo .goodActiveTitle{font-size: 2rem;color:#39b1ff; }
+#activeInfo .goodActiveInfo .goodActiveRanking {text-align: center;font-size: 2rem;}
+#activeInfo .goodActiveInfo .oneRanking{position: relative;top: -2rem;}
+#activeInfo .goodActiveInfo .goodActiveRanking .goodActiveImg{width: 12rem;height: 12rem;border-radius: 50%;  position: relative;  left: 0.5rem;}
+#activeInfo .goodActiveInfo .goodActiveRanking .goodActiveIcon{display: block; position: relative;  top: -1.5rem;left: 0.5rem;}
+.goodActiveIcon img{width: 12rem;  height: 3.5rem;margin: auto;margin-right: 1rem;}
+
+#activeInfo .activeRankingList{margin-top: 2rem;}
+
+/*课堂活跃信息 end*/
+
+/*课堂活跃信息弹出层 start*/
+#activeInfo .dismiss{position: absolute;right: 1rem;font-size: 2rem;font-weight: bold;}
+/*课堂活跃信息弹出层 end*/
+
+.a{border: 1px solid blue;}
+.b{border: 1px solid red;}

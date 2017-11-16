@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<!--landIng.html-->
+<!-- 登陆页面 -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>登陆页面</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+</head>
+
+<body id="logoIngBg">
+<header>
+    <div class="row ">
+        <div class="col-sm-1 col-xs-1   text-center returnBtn">
+            <span class=" glyphicon glyphicon-menu-left " onclick="javascript:window.history.back(-1);"></span>
+        </div>
+        <div class="col-xs-10 col-sm-10 text-center">登陆</div>
+    </div>
+</header>
+<div class="container-fluid logoIngBox">
+    <div class="logo margin-top2">
+        <span class="logoText">互动</span><span class="logoSubtitle"><p>新</p><p>课</p><p>堂</p></span>
+        <p class="logoBpttomText">New&nbsp;Classroom</p>
+    </div>
+    <div class="row margin-top2 ">
+        <div class="col-sm-offset-1 col-sm-10 ">
+            <!--<form>-->
+                <div class="form-group">
+                    <label for="exampleInputEmail1">用户名／手机号</label>
+                    <input type="text" class="form-control input-lg" id="user_name" placeholder="请输入用户名／手机号" data-container="body" data-toggle="popover" data-placement="top" data-content="">
+                </div>
+                <!---->
+                <!--<div class="form-group ">-->
+                    <!--<label for="exampleInputPassword1">密码：</label>-->
+                    <!--<input type="password" class="form-control input-lg" id="exampleInputPassword1" placeholder="请输入密码">-->
+                <!--</div>-->
+
+                <div class="checkbox ">
+                    <label>
+                        <div class="text-muted">点击上面"登陆"按钮，即表示您同意</div>
+                        <a href="javascript:">&lt;&lt;互动新课堂软件用户服务协议&gt;&gt;</a>
+                    </label>
+                </div>
+                <!--<a href="teacherNewClassHistpryClass.html">-->
+                    <button type="button" class="btn btn-info btn-lg btn-block " id="teacherLogin">教师 登&nbsp;&nbsp;陆</button>
+                <!--</a>-->
+                <div class="margin-top2">
+                    <a href="studentClassHistpry.html">
+                        <button type="button" class="btn btn-info btn-lg btn-block " id="studentLogin">学生 登&nbsp;&nbsp;陆</button>
+                    </a>
+                </div>
+
+            <!--</form>-->
+        </div>
+    </div>
+
+</div>
+</body>
+<script src="../js/common.js"></script>
+<script>
+    window.onload = function(){
+        sessionStorage.clear();
+    };
+</script>
+
+
+</html>

@@ -1,0 +1,86 @@
+/* 重写header的颜色样式  20170906 add by 文霞 */
+.page-header.navbar{
+    border-bottom: 2px solid #EEEEEE;
+    background-color: #fdfdfd;
+}
+/* 添加文档页，段落内容样式  20170906 add by 文霞 */
+.section-item-content{
+    padding: 0px 20px 15px 26px;
+}
+/* 修改 左侧菜单的选中样式 20170907 by 文霞*/
+.page-sidebar .page-sidebar-menu .sub-menu > li.active {
+    border-right: 5px solid #3FD5C0;
+    /*border-left: 5px solid #3FD5C0;*/
+}
+
+/*重写logo样式为自适应宽度，高度，不做拉伸*/
+.page-header.navbar .page-logo .logo-default {
+    margin: 10px 0 0 24px;
+    width: auto;
+    height: auto;
+}
+
+/*中间*/
+pre{
+    display: block;
+    border: 0px solid #e1e1e1;
+    -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+/*文档搜索*/
+.top-search{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.top-search input,.top-search button{border-radius:6px !important; height:46px;}
+.form-control:focus{
+    box-shadow: 0 0 10px #ea9622;border-color: #ea9622;
+}
+
+/*文档中间块*/
+#overview{  color:#fff; overflow: hidden;}
+#overview .first{  float: left; overflow: hidden;  width: 40%;  }
+#overview .outer{  float: left; overflow: hidden;  width: 40%;  }
+#overview .outer .wrap1{  float: left; width: 100%;  }
+#overview .outer .wrap2{  float: right; width: 50%;  }
+#overview .last{  float: right; overflow: hidden;  width: 20%;  }
+#overview a{display: block; color: #fff;  text-decoration: none;text-align: left;margin-bottom: 10px;}
+
+
+#overview2{  color:#fff; overflow: hidden; margin-bottom: 20px;  }
+#overview2 .outer{  float: left; overflow: hidden;  width: 100%;  }
+#overview2 .outer .wrap1{  float: left; width: 100%;  }
+#overview2 .outer .wrap2{  float: right; width: 50%;  }
+#overview2 a{display: block; color: #fff;  text-decoration: none;text-align: left;margin-bottom: 10px;}
+
+.index-start{  height:220px; padding-left: 35%;padding-right:8%;margin-right:10px;background: url(../img/index-start.png) no-repeat 10% center;  }
+.index-start .title{  display: block;padding-top:70px;margin-bottom: 10px;font-size: 16px;  }
+.index-start .intro{  font-size: 12px; line-height: 20px;  }
+.index-app {  height:105px;line-height: 105px;  padding-left: 18%;margin-right:10px;background: url(../img/index-app.png) no-repeat 7.5% center;  }
+.index-app2 {  height:105px;line-height: 105px;  padding-left: 18%;background: url(../img/index-app.png) no-repeat 7.5% center;  }
+.index-drf {  height:105px;line-height: 105px;  padding-left: 34%;margin-right:10px; background: url(../img/index-drf.png) no-repeat 15% center;  }
+.index-drf2 {  height:105px;line-height: 105px;  padding-left: 34%; background: url(../img/index-drf.png) no-repeat 15% center;  }
+.index-iom {  height:105px; line-height: 105px;  padding-left: 34%;margin-right:10px; background: url(../img/index-iom.png) no-repeat 17% center;  }
+.index-api{  height:220px;line-height: 220px;  padding-left: 48%;background: url(../img/index-api.png) no-repeat 10% center;  }
+.index-color1 {  background-color: #e18c5a;  }
+.index-color1:hover{  background-color: #f49054;  }
+.index-color2 {  background-color: #00b4dc;  }
+.index-color2:hover{  background-color: #06c2ec;  }
+.index-color3{  background-color: #3dcbaa;  }
+.index-color3:hover{  background-color: #44dcb9;  }
+.index-color4{  background-color: #de81b2;  }
+.index-color4:hover{  background-color: #f078b3  }
+.index-color5{  background-color: #2dafbc;  }
+.index-color5:hover{  background-color: #2dc0cf;  }
+.index-color6{  background-color: #8E44AD;  }
+.index-color6:hover{  background-color: #BF55EC;  }
+.index-color7{  background-color: #3369bd;  }
+.index-color7:hover{  background-color: #4178ce;  }
+.index-color8{  background-color: #525E64;  }
+.index-color8:hover{  background-color: #61747d;  }
+
+/**/
+

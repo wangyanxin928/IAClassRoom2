@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<!--landIng.html-->
+<!-- 选择登陆／注册页面导航 -->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>互动主页</title>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="../css/common.css">
+
+	</head>
+
+	<body>
+		<div class="content">
+			<div id="landIng">
+				<div class="logo">
+					<span class="logoText">互动</span><span class="logoSubtitle"><p>新</p><p>课</p><p>堂</p></span>
+					<p class="logoBpttomText">New&nbsp;Classroom</p>
+				</div>
+				<div class="row  landIngBtnBox margin-auto" >
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<a href="loginPage.html"><button type="button" class="btn btn-info btn-lg btn-block p16">登&nbsp;陆</button></a>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<a href="registerPage.html"><button type="button" class="btn btn-default btn-lg btn-block p16">注&nbsp;册</button></a>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+	</body>
+
+</html>

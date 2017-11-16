@@ -1,0 +1,38 @@
+/*
+ 2017年6月5日
+ byx
+ 用户登录模块的业务处理层
+ * */
+var $util = require('../../util/util');
+var userLoginDao = require('../../dao/user_dao/userLoginDao');
+var $writelog = require('../../libs/logHelper');
+
+module.exports = {
+    //用户登录
+    userLogin: function (req, res, next) {
+        try {
+            // 获取前台页面传过来的参数
+            var param = req.query || req.params;
+            param = JSON.parse(param.JSONPARAM);
+            var user_name = param.user_name;
+
+        } catch (e) {
+            $util.resJSONError(e, res);
+            return;
+        }
+        userLoginDao.userLogin(user_name, function (err, result) {
+            if (err != null) {
+                $util.resJSONError(err, res);
+                return;
+            }
+            if(result.length == 0){
+                result[0] = 0;
+            }
+            $util.resJSON.resultnum = $util.resConfig.ok;
+            $util.resJSON.resultdata = result[0];
+            res.json($util.resJSON);
+        });
+
+    },
+
+};

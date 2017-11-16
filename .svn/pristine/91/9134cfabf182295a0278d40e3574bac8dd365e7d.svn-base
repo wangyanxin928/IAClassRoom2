@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<!--classGradePage.html-->
+<!-- 登陆页面 -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>选择年级</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+</head>
+
+<body class="bg-lightBlue ">
+<header class=" bg-lightBlue text-white">
+    <div class="row ">
+        <div class="col-sm-1 col-xs-1   text-center returnBtn">
+            <span class=" glyphicon glyphicon-menu-left " onclick="javascript:window.history.back(-1);"></span>
+        </div>
+    </div>
+</header>
+<div class="container-fluid ">
+    <div class="row text-white ">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h2>您上课班级？</h2>
+            <h4>请选择您所教的班级</h4>
+        </div>
+    </div>
+    <div class="row text-white gradeList">
+        <div class="col-xs-12 col-sm-12 col-md-12"><h4>一年级</h4></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">1班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">2班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">3班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">4班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">5班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">6班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">7班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">8班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">9班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">10班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">11班</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">12班</button></div>
+    </div>
+
+</div>
+</body>
+<script>
+    $('.gradeList button').click(function (e) {
+        location = "courseGradePage.html";
+    })
+</script>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<!--groupingList.html-->
+<!-- 登陆页面 -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>上课点名</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <style>
+        .modal {
+            top: 30%;
+        }
+    </style>
+
+
+</head>
+
+<body class="bg-white ">
+<header class=" bg-lightBlue text-white">
+    <div class="row ">
+        <div class="col-sm-1 col-xs-1   text-center returnBtn">
+            <span class=" glyphicon glyphicon-menu-left " onclick="javascript:window.history.back(-1);"></span>
+        </div>
+        <div class="col-xs-7 col-sm-7 text-center " id="groupingListTitle"></div>
+        <div class="col-sm-2 col-xs-2">
+            <span class="btn btn-primary  btn-block rollCallBtn">随机点名</span>
+        </div>
+        <div class="col-sm-2 col-xs-2">
+            <span class="btn btn-success  btn-block  " id="beginsClassBtn" data-value="1">开始上课</span>
+        </div>
+
+    </div>
+</header>
+
+<div class="container-fluid  " id="groupingList">
+    <!--学员分组列表 start-->
+    <div class="row" id="groupingListInfo"></div>
+    <!--学员分组列表 end-->
+</div>
+
+<!-- 点名弹出框 start-->
+<div class="modal fade" id="rollCall" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="automaticGroupingLabel"></h4>
+            </div>
+            <div class="modal-body rollCallBox">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-6 col-sm-offset-3 col-xs-offset-3  ">
+                        <img src="../images/womon.png" alt="" class="studentPortrait ">
+                        <div class="studentInfo">
+                            <span class="studentName">张秀娟</span>
+                            <b class="leaderIcon">组长</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 text-center margin-top2">
+                        <h4>请对本次问答评分</h4>
+                        <div class="margin-top2">
+                            <img src="../images/xingxing.png" alt="" style="width: 70%;">
+                            <span>不太满意</span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer text-center" style="text-align: center;">
+                <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-primary btn-lg">确&nbsp;&nbsp;定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 点名弹出框 start-->
+
+<!--上课提示信息start-->
+<div class="modal fade" id="beginsClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body rollCallBox">
+                <div class="h4 text-success" id="beginsPromptInfo">
+                    <!--老师您好：您上的课为：高三（1）班／物理课。-->
+                </div>
+
+            </div>
+            <div class="modal-footer text-center" style="text-align: center;">
+                <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-primary btn-lg" id="confirmBeginsClassBtn">确认上课</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--上课提示信息 end-->
+
+<!--下课提示信息 start-->
+<div class="modal fade" id="ConfirmOverClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body rollCallBox">
+                <div class="h4 text-danger" id="ConfirmOverClassPromptInfo">
+                    <!--请确认：高三（1）班／物理课是否下课。-->
+                </div>
+
+            </div>
+            <div class="modal-footer text-center" style="text-align: center;">
+                <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">取&nbsp;&nbsp;消</button>
+                <button type="button" class="btn btn-primary btn-lg" id="confirmOverClassBtn">确认下课</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--下课提示信息 end-->
+
+<!--请先确认上课才能点名 start-->
+<div class="modal fade" id="confirmClassFirst" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body rollCallBox">
+                <div class="h4 text-danger">
+                    确认开始上课后才能进行点名哦，谢谢！。
+                </div>
+
+            </div>
+            <div class="modal-footer text-center" style="text-align: center;">
+                <button type="button" class="btn btn-info btn-lg" data-dismiss="modal">知道啦！</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--请先确认上课才能点名  end-->
+
+<!--下课后显示课堂活跃排名 start-->
+
+<div class="modal fade" id="activeInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <span  class=" dismiss" data-dismiss="modal">X</span>
+    <div class="goodActiveInfo">
+
+        <div class="row">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
+                <div class="row" id="goodActiveRankingBox">
+                    <!--<div class="col-sm-4 goodActiveRanking"><img src="../images/womon.png" alt="" class="goodActiveImg"><div class="goodActiveIcon"><img src="../images/ranking2.png" alt=""></div><div>张莘涵</div><div class="">90分</div></div><div class="col-sm-4 goodActiveRanking oneRanking"><img src="../images/womon.png" alt="" class="goodActiveImg"><div class="goodActiveIcon"><img src="../images/ranking1.png" alt=""></div><div>张莘涵</div><div class="">90分</div></div><div class="col-sm-4 goodActiveRanking"><img src="../images/womon.png" alt="" class="goodActiveImg"><div class="goodActiveIcon"><img src="../images/ranking3.png" alt=""></div><div>张莘涵</div><div class="">90分</div></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="activeRankingList">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <table class="table table-bordered ">
+                    <thead>
+                    <tr>
+                        <th width="20">名次</th>
+                        <th width="100">姓名</th>
+                        <th width="50">性别</th>
+                        <th width="100">答题次数</th>
+                        <th width="100">平均得分</th>
+                    </tr>
+                    </thead>
+                    <tbody id="selectRankingList">
+                    <!--<tr><td>1</td><td>张莘涵</td><td>女</td><td>5</td><td>89</td></tr>-->
+                    <!--<tr>-->
+                        <!--<td>2</td>-->
+                        <!--<td>张莘涵</td>-->
+                        <!--<td>女</td>-->
+                        <!--<td>5</td>-->
+                        <!--<td>89</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer text-center" style="text-align: center;">
+        <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">关&nbsp;闭</button>
+    </div>
+
+</div>
+
+
+<!--下课后显示课堂活跃排名 end-->
+
+<script src="../js/common.js"></script>
+</body>
+<script>
+    window.onload = function(){
+        groupingList();
+    };
+</script>
+
+</html>

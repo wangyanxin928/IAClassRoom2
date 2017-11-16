@@ -1,0 +1,51 @@
+// 新用户注册页start
+
+// 新用户注册页end
+
+
+
+
+// 点名提问功能，点击某个人的头像或其它个人信息则弹出被点人的信息及自身增加已选中状态 start
+$(document).on("click",".rollCallBtn",function (e) {
+    var _this = $(this);
+    var beginsClassVal= $("#beginsClassBtn").attr('data-value');
+    console.log(beginsClassVal);
+    if(beginsClassVal=='1'){
+        $('#confirmClassFirst').modal({keyboard: true})
+
+    }else {
+        $(".active").removeClass('active');
+        _this.addClass('active');
+        $('#rollCall').modal({keyboard: true})
+    }
+
+});
+// 点名提问功能 end
+
+//开始上课按钮 start
+$('#beginsClassBtn').click(function (e) {
+    var beginsClassVal = $(this).attr('data-value');
+    console.log(beginsClassVal);
+    if (beginsClassVal == "1") {
+        $('#beginsClass').modal({keyboard: true});
+    }
+    else if (beginsClassVal == "2") {
+        $('#ConfirmOverClass').modal({keyboard: true})
+    }
+});
+$(document).on("click","#confirmBeginsClassBtn",function (e) {
+    $('#beginsClass').modal("hide");
+    var _this=$('#beginsClassBtn');
+    _this.removeClass('btn-success').addClass('btn-danger');
+    _this.attr("data-value", "2");
+    _this.html("下课");
+});
+$(document).on("click","#confirmOverClassBtn",function (e) {
+    $('#ConfirmOverClass').modal("hide");
+    $('#activeInfo').modal({keyboard: true});
+    var _this=$('#beginsClassBtn');
+    _this.removeClass('btn-danger').addClass('btn-success');
+    _this.attr("data-value", "1");
+    _this.html("开始上课");
+});
+//开始上课按钮 end

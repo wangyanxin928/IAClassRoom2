@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<!--gradeSelectionPage.html-->
+<!-- 登陆页面 -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>选择年级</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+
+</head>
+
+<body class="bg-lightBlue ">
+<header class=" bg-lightBlue text-white">
+    <div class="row ">
+        <div class="col-sm-1 col-xs-1   text-center returnBtn">
+            <span class=" glyphicon glyphicon-menu-left " onclick="javascript:window.history.back(-1);"></span>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid ">
+    <div class="row text-white">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <h2>您所教的年级？</h2>
+            <h4>选择您所教的年级</h4>
+        </div>
+    </div>
+    <div class="row text-white gradeList">
+        <div class="col-xs-12 col-sm-12 col-md-12"><h4>小学</h4></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">幼升小</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">一年级</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">二年级</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">三年级</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">四年级</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">五年级</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">六年级</button></div>
+    </div>
+    <div class="row text-white gradeList">
+        <div class="col-xs-12 col-sm-12 col-md-12"><h4>初中</h4></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">初一</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">初二</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">初三</button></div>
+    </div>
+    <div class="row text-white gradeList">
+        <div class="col-xs-12 col-sm-12 col-md-12"><h4>高中</h4></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">高一</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">高二</button></div>
+        <div class="col-sm-3 col-xs-4"><button type="button" class="btn btn-default btn-block btn-lg">高三</button></div>
+    </div>
+
+</div>
+</body>
+
+<script>
+    $('.gradeList button').click(function (e) {
+        location = "classGradePage.html";
+    })
+</script>
+</html>

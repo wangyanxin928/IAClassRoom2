@@ -1,0 +1,621 @@
+// 外网
+// var requestUrl ="http://101.200.231.203:9004/";
+
+// 赵志洋ip
+var requestUrl = "http://192.168.1.25:3388/IAClassRoom/";
+
+//公共ajax请求方法 start
+var getdata = function (iter, p, _callback) {
+    var obj;
+    if (p) {
+        obj = {JSONPARAM: JSON.stringify(p)};
+    }
+    $.ajax({
+        type: iter.itype,
+        url: requestUrl + iter.iname + "?_n=" + Date.parse(new Date()) / 1000,
+        data: obj,
+        datatype: "JSON",
+        success: function (res) {
+            //后台返回的是json
+            //res = JSON.parse(res);
+            _callback(res);
+        },
+        error: function (e) {
+        }
+    });
+};
+//公共ajax请求方法 end
+
+
+//初始化提示弹出框 start
+$(function () {
+    $('[data-toggle="popover"]').popover()
+});
+//初始化提示弹出框 end
+
+//初始化 strat
+
+
+//初始化 end
+
+// 登陆页面 start
+$("#teacherLogin").click(function (e) {
+    var user_name = $("#user_name").val();
+    console.log(user_name);
+    if (user_name != "" && user_name != null && user_name != "undefined") {
+        var ajaxobj = {
+            itype: "get",
+            iname: "user/userRoute/userLogin"
+        };
+        var actobj = {"user_name": user_name,};
+        getdata(ajaxobj, actobj, function (data) {
+            console.log(data);
+            if (data.resultdata == "0") {
+                $("#user_name").attr("data-content", "用户不存在请查看是否正确");
+                $("#user_name").popover('show');
+                setTimeout(function (e) {
+                    $("#user_name").popover('hide');
+                    $("#user_name").attr("data-content", "");
+                }, 2000);
+            } else {
+                if (data.resultnum != "0000") {
+                    console.log("Error");
+                    return;
+                } else {
+
+                    console.log("请求成功");
+                    console.log(data.resultdata.role_name);
+
+                    // 存储到缓存 start
+                    sessionStorage.setItem("user_id", data.resultdata.user_id);//用户编号
+                    sessionStorage.setItem("user_name", data.resultdata.user_name);//用户名称
+                    sessionStorage.setItem("true_name", data.resultdata.true_name);//真实姓名
+                    sessionStorage.setItem("role_name", data.resultdata.role_name);//角色名称
+                    sessionStorage.setItem("server_id", data.resultdata.server_id);//所属机构Id
+                    sessionStorage.setItem("sex", data.resultdata.sex);//用户性别
+                    // 存储到缓存 end
+
+                    var server_id = data.resultdata.server_id;
+                    var role_name = data.resultdata.role_name;
+
+                    if (role_name == "教师") {
+                        console.log("教师登陆");
+                        window.location.href = 'newClassHistpryClass.html?server_id=' + server_id;
+                    } else {
+                        console.log("学生登陆");
+                        window.location.href = "studentNewClassHistpryClass.html";
+                    }
+                }
+            }
+        });
+    } else {
+        $("#user_name").attr("data-content", "用户名/手机号不能为空");
+        $("#user_name").popover('show');
+        setTimeout(function (e) {
+            $("#user_name").popover('hide');
+            $("#user_name").attr("data-content", "");
+        }, 2000);
+    }
+});
+// 登陆页面 end
+
+// 添加新课程 选择年级跳转 start
+$("#newClassHistpryClass").click(function () {
+    window.location.href = 'gradeSelectionPage.html';
+});
+
+
+// 添加新课程 选择年级跳转 end
+
+// 创建新课程 start
+function gradeSelectionPage(e) {
+    var server_id = sessionStorage.getItem("server_id");
+    console.log(server_id);
+    if (server_id != "" && server_id != null && server_id != "undefined") {
+        var ajaxobj = {
+            itype: "get",
+            iname: "class/classBeforeRoute/getGradeList"
+        };
+        var actobj = {
+            "server_id": server_id,
+        };
+        getdata(ajaxobj, actobj, function (data) {
+            console.log(data);
+            {
+                if (data.resultnum != "0000") {
+                    console.log("Error");
+                    return;
+                } else {
+                    console.log("请求成功");
+                    var primarySchoolStr = "";
+                    var juniorSchoolStr = "";
+                    var highSchoolStr = "";
+
+                    //小学分组 start
+                    $.each(data.resultdata.slice(0, 7), function (index, item) {
+                        primarySchoolStr += "<div class='col-sm-3 col-xs-4 '><button id='" + item.grade_id + "' type='button' class='btn btn-default btn-block btn-lg grade'>" + item.grade_name + "</button></div>";
+                    });
+                    //小学分组 end
+                    //初中分组显示 start
+                    $("#primarySchool").append(primarySchoolStr);
+                    $.each(data.resultdata.slice(7, 10), function (index, item) {
+                        juniorSchoolStr += "<div class='col-sm-3 col-xs-4 '><button id='" + item.grade_id + "' type='button' class='btn btn-default btn-block btn-lg grade'>" + item.grade_name + "</button></div>";
+                    });
+                    //初中分组显示 end
+                    //高中分组显示 start
+                    $("#juniorSchool").append(juniorSchoolStr);
+                    $.each(data.resultdata.slice(10, 13), function (index, item) {
+                        highSchoolStr += "<div class='col-sm-3 col-xs-4 '><button id='" + item.grade_id + "' type='button' class='btn btn-default btn-block btn-lg grade'>" + item.grade_name + "</button></div>";
+                    });
+                    $("#highSchool").append(highSchoolStr);
+                    //高中分组显示 end
+                }
+            }
+        });
+    }
+}
+
+//获取用户点击的年级ID 查找用户年级下的班级列表 start
+$(document).on("click", ".grade", function (e) {
+    var _this = $(this);
+    var grade_id = _this.attr("id");
+    var grade_name = _this.html();
+    // 存储到缓存 start
+    sessionStorage.setItem("grade_id", grade_id);//用户年级ID
+    sessionStorage.setItem("grade_name", grade_name);//年级名称
+    // 存储到缓存 end
+    window.location.href = 'classGradePage.html';
+});
+//获取用户点击的年级ID 查找用户年级下的班级列表 end
+
+// 根据不同的年级显示不同的班级列表
+//班级列表 start
+function classGradePage(e) {
+    var grade_id = sessionStorage.getItem("grade_id");
+    console.log(grade_id);
+    if (grade_id != "" && grade_id != null && grade_id != "undefined") {
+        var ajaxobj = {
+            itype: "get",
+            iname: "class/classBeforeRoute/getClassList"
+        };
+        var actobj = {
+            "grade_id": grade_id,
+        };
+        getdata(ajaxobj, actobj, function (data) {
+            console.log(data);
+            {
+                if (data.resultnum != "0000") {
+                    console.log("Error");
+                    return;
+                } else {
+                    console.log("请求成功");
+                    //年级显示 start
+                    if (data.resultdata.length > 0) {
+                        var stageName = data.resultdata[0].grade_name;
+                    } else {
+                        stageName = '您选择的年级没有班级，请重新选择年级，谢谢！';
+                        $("#stageName").css("color", "red");
+                    }
+                    $("#stageName").html(stageName);
+                    //年级显示 end
+
+                    var classGradeListStr = "";
+                    //班级分组 start
+                    $.each(data.resultdata, function (index, item) {
+                        classGradeListStr += "<div class='col-sm-3 col-xs-4'><button type='button'  id='" + item.class_id + "' class='btn btn-default btn-block btn-lg'>" + item.class_name + "</button></div>";
+                    });
+                    //班级分组 end
+                    $("#classGradeList").append(classGradeListStr);
+                }
+            }
+        });
+    }
+    // 点击班级后进行跳转科目列表 start
+    $(document).on("click", "#classGradeList .btn", function (e) {
+        var _this = $(this);
+        var class_id = _this.attr("id");
+        var class_name = _this.html();
+
+        // 存储到缓存 start
+        sessionStorage.setItem("class_id", class_id);//用户年级ID
+        sessionStorage.setItem("class_name", class_name);//年级名称
+        // 存储到缓存 end
+
+        window.location.href = 'courseGradePage.html';
+    });
+    // 点击班级后进行跳转科目列表 end
+}
+
+//班级列表 end
+
+// 科目列表start
+function courseGradePage(e) {
+
+    var grade_id = sessionStorage.getItem("grade_id");
+    if (grade_id != "" && grade_id != null && grade_id != "undefined") {
+        var ajaxobj = {
+            itype: "get",
+            iname: "class/classBeforeRoute/getSubjectList"
+        };
+        var actobj = {
+            "grade_id": grade_id,
+        };
+        getdata(ajaxobj, actobj, function (data) {
+            console.log(data);
+            {
+                if (data.resultnum != "0000") {
+                    console.log("Error");
+                    return;
+                } else {
+                    console.log("请求成功");
+
+                    var classGradeListStr = "";
+                    //学科列表 start
+                    $.each(data.resultdata, function (index, item) {
+                        classGradeListStr += "<div class='col-xs-4 col-sm-3 text-center'><div class='courseBtn' id=" + item.subject_id + " subject_type=" + item.subject_type + "><img src=" + item.subject_src + " ><h4>" + item.subject_name + "</h4></div></div>";
+
+
+                    });
+                    //学科列表 end
+                    $("#classGradeList").append(classGradeListStr);
+                }
+            }
+        });
+    }
+    $(document).on("click", "#classGradeList .courseBtn", function (e) {
+        var _this = $(this);
+        var subject_id = _this.attr("id");
+        var subject_name = _this.children("h4").html();
+        var subject_type = _this.attr("subject_type");
+
+        // 存储到缓存 start
+        sessionStorage.setItem("subject_id", subject_id);//学科Id
+        sessionStorage.setItem("subject_name", subject_name);//学科名称
+        sessionStorage.setItem("subject_type", subject_type);//学科类型
+        // 存储到缓存 end
+
+        var grade_name = sessionStorage.getItem("grade_name");
+        var class_name = sessionStorage.getItem("class_name");
+        var createNewCoursesInfo = grade_name + "（" + class_name + "）" + subject_name + "课";
+        $("#createNewCoursesInfo").html(createNewCoursesInfo);
+
+        // 创建新课程提示信息 start
+        $('#createNewCourses').modal({keyboard: true});
+        // 创建新课程提示信息 end
+        //    确认创建start
+        $(document).on("click", '#confirmCreationBtn', function (e) {
+            $('#createNewCourses').modal('hide');
+            var server_id = sessionStorage.getItem("server_id");
+            var class_id = sessionStorage.getItem("class_id");
+            var class_name = sessionStorage.getItem("class_name");
+            var grade_id = sessionStorage.getItem("grade_id");
+            var grade_name = sessionStorage.getItem("grade_name");
+            var subject_id = sessionStorage.getItem("subject_id");
+            var subject_name = sessionStorage.getItem("subject_name");
+
+            var ajaxobj = {
+                itype: "get",
+                iname: "class/classBeforeRoute/insertSubjectList"
+            };
+            var actobj = {
+                "server_id": server_id,
+                "class_id": class_id,
+                "class_name": class_name,
+                "grade_id": grade_id,
+                "grade_name": grade_name,
+                "subject_id": subject_id,
+                "subject_name": subject_name,
+
+            };
+            getdata(ajaxobj, actobj, function (data) {
+                // window.location.href="groupingList.html";
+                console.log(data);
+                {
+                    if (data.resultnum != "0000") {
+                        console.log("Error");
+                        return;
+                    } else {
+                        console.log("请求成功");
+                        sessionStorage.setItem("iaclass_id", data.resultdata.iaclass_id);
+                        window.location.href = "groupingList.html";
+                    }
+                }
+
+
+            });
+
+        })
+        //    确认创建end
+
+    });
+}
+
+
+// 科目列表end
+
+// 根据年级/班级/学科 查看分组详情 start
+function groupingList() {
+    var iaclass_id = sessionStorage.getItem("iaclass_id");
+    var ajaxobj = {
+        itype: "get",
+        iname: "class/classBeforeRoute/getStudentNumbers"
+    };
+    var actobj = {
+        "iaclass_id": iaclass_id,
+    };
+    getdata(ajaxobj, actobj, function (data) {
+        var grouping=data.resultdata.grouping;
+        sessionStorage.setItem("grouping",grouping);
+        {
+            if (data.resultnum != "0000") {
+                var noStudentListInfo = data.resultdata.iaclass_name + "课";
+                $("#groupingListTitle").html(noStudentListInfo);
+
+                var noStudentListInfoStr = "";
+                noStudentListInfoStr += "<div style='padding: 15px'><h4 style='color: red'>您所创建的：" + noStudentListInfo + "课，<p style='margin-top: 10px;'>没有学生分组信息请登陆后台管理进行创建分组，谢谢！</p></h4></div>";
+                $("#groupingListInfo").append(noStudentListInfoStr);
+                return;
+            } else {
+                // console.log("请求成功");
+                //显示所创建的年级 班级 课程名称
+                $("#groupingListTitle").html(data.resultdata.grouping + "课");
+
+                //获取开始上课按钮的状态 start
+                var state = data.resultdata.state;
+                var _this = $('#beginsClassBtn');
+                if (state == '0') {
+                    _this.removeClass('btn-danger').addClass('btn-success');
+                    _this.attr("data-value", "1");
+                    _this.html("开始上课");
+                } else if (state == '1') {
+                    //改变按钮样式及文字 start
+                    _this.removeClass('btn-success').addClass('btn-danger');
+                    _this.attr("data-value", "2");
+                    _this.html("下课");
+                    //改变按钮样式及文字 end
+                }else if (state == '2'){
+                    _this.removeClass('btn-success').addClass('btn-primary');
+                    _this.removeClass('btn-danger').addClass('btn-primary');
+                    _this.attr("data-value", "3");
+                    _this.html("课程已结束");
+                    _this.attr("id","confirmOverClassBtn")
+                }
+                //获取开始上课按钮的状态 end
+
+                // 存储到缓存 start
+                sessionStorage.setItem("state", data.resultdata.state);//上课状态
+                // 存储到缓存 end
+
+                //学科列表 start
+                $.each(data.resultdata.renyuan_lists, function (index, item) {
+                    var groupingListInfoStr = "";
+                    groupingListInfoStr += " <div class='col-xs-6 col-sm-6  margin-top2' >" +
+                        "<div class='col-xs-12 col-sm-12 bg-gray2 studentList'>" +
+                        "<div class='groupName'>" + item.renyuan_num.iagroup_name + "（" + item.renyuan_num.user_num + "人）</div>" +
+                        "<div class='line'></div>" +
+                        "<div class= 'studentInfo'><div class='row'>";
+                    $.each(item.course_date_list, function (index2, item2) {
+                        var user_type = item2.user_type;
+                        if (user_type == "1") {
+                            user_type = "教师";
+                            groupingListInfoStr += "<div class='col-xs-6 col-sm-6 rollCallBtn'>" +
+                                "<div class='row padding1  leader'>" +
+                                "<img src='../images/womon.png' alt='' class='studentPortrait '>" +
+                                "<b class='leaderIcon'>" + user_type + "</b>" +
+                                "<span class='studentName'>" + item2.true_name + "</span>" +
+                                "</div>" +
+                                "</div>";
+                        } else if (user_type == "2") {
+                            user_type = "组长";
+                            groupingListInfoStr += "<div class='col-xs-6 col-sm-6 rollCallBtn'>" +
+                                "<div class='row padding1  leader'>" +
+                                "<img src='../images/womon.png' alt='' class='studentPortrait '>" +
+                                "<b class='leaderIcon'>" + user_type + "</b>" +
+                                "<span class='studentName'>" + item2.true_name + "</span>" +
+                                "</div>" +
+                                "</div>";
+                        } else if (user_type == "3") {
+                            groupingListInfoStr += "<div class='col-xs-6 col-sm-6 rollCallBtn'>" +
+                                "<div class='row padding1  leader'>" +
+                                "<img src='../images/womon.png' alt='' class='studentPortrait '>" +
+                                "<span class='studentName'>" + item2.true_name + "</span>" +
+                                "</div>" +
+                                "</div>";
+                        }
+
+                        // groupingListInfoStr+="<div class='col-xs-6 col-sm-6 rollCallBtn'>" +
+                        //         "<div class='row padding1  leader'>" +
+                        //             "<img src='../images/womon.png' alt='' class='studentPortrait '>" +
+                        //             "<b class='leaderIcon'>"+user_type+"</b>" +
+                        //             "<span class='studentName'>"+item2.true_name+"</span>" +
+                        //         "</div>" +
+                        //     "</div>";
+
+
+                    });
+                    groupingListInfoStr += '</div></div></div></div>';
+                    $("#groupingListInfo").append(groupingListInfoStr)
+
+                });
+            }
+        }
+    });
+
+
+}
+
+// 查看年级/班级/学科分组详情 end
+
+// 创建新课程 end
+
+
+// 点名提问功能，点击某个人的头像或其它个人信息则弹出被点人的信息及自身增加已选中状态 start
+$(document).on("click", ".rollCallBtn", function (e) {
+    var _this = $(this);
+    var beginsClassVal = $("#beginsClassBtn").attr('data-value');
+    console.log(beginsClassVal);
+    if (beginsClassVal == '1') {
+        $('#confirmClassFirst').modal({keyboard: true});
+
+    } else {
+        $(".active").removeClass('active');
+        _this.addClass('active');
+        $('#rollCall').modal({keyboard: true})
+    }
+
+});
+// 点名提问功能 end
+
+
+//上课中开始 start
+$('#beginsClassBtn').click(function (e) {
+    var grouping=sessionStorage.getItem("grouping");
+    var beginsClassVal = $(this).attr('data-value');
+    if (beginsClassVal == "1") {
+        $("#beginsPromptInfo").html("老师您好：您上的课为："+grouping+"课");
+        $('#beginsClass').modal({keyboard: true});
+
+    }
+    else if (beginsClassVal == "2") {
+        $("#ConfirmOverClassPromptInfo").html("请确认："+grouping+"课，是否结束。");
+        $('#ConfirmOverClass').modal({keyboard: true});
+
+    }else if(beginsClassVal == "3"){
+        $('#activeInfo').modal({keyboard: true});
+    }
+
+});
+// 确认上课 start
+$(document).on("click", "#confirmBeginsClassBtn", function (e) {
+
+    var iaclass_id = sessionStorage.getItem("iaclass_id");
+
+    var ajaxobj = {
+        itype: "get",
+        iname: "class/classBeforeRoute/updateCourse"
+    };
+    var actobj = {
+        "iaclass_id": iaclass_id,
+    };
+    getdata(ajaxobj, actobj, function (data) {
+        console.log(data);
+        {
+            if (data.resultnum != "0000") {
+                console.log("Error");
+                return;
+            } else {
+                // console.log("请求成功");
+                $('#beginsClass').modal("hide");
+                //改变按钮样式及文字 start
+                var _this = $('#beginsClassBtn');
+                _this.removeClass('btn-success').addClass('btn-danger');
+                _this.attr("data-value", "2");
+                _this.html("下课");
+                //改变按钮样式及文字 end
+            }
+        }
+    });
+});
+// 确认上课 end
+
+
+//课程结束获取互动课堂学生排名 start
+$(document).on("click", "#confirmOverClassBtn", function (e) {
+    $('#ConfirmOverClass').modal("hide");
+    var iaclass_id = sessionStorage.getItem("iaclass_id");
+    if (iaclass_id != "" && iaclass_id != null && iaclass_id != "undefined") {
+        var ajaxobj = {
+            itype: "get",
+            iname: "class/classBeforeRoute/selectRankingList"
+        };
+        var actobj = {
+            "iaclass_id": iaclass_id,
+        };
+        getdata(ajaxobj, actobj, function (data) {
+            console.log(data);
+            {
+                if (data.resultnum != "0000") {
+                    console.log("Error");
+                    return;
+                } else {
+                    console.log("请求成功");
+                    var groupingListDataLength=data.resultdata.length;
+                    console.log("排名长度为 "+groupingListDataLength);
+                    if(groupingListDataLength>=3){
+
+                        var twoRanking=data.resultdata[1];
+                        var oneRanking=data.resultdata[0];
+                        var threeRanking=data.resultdata[2];
+
+                        var goodActiveRankingBoxStr="";
+
+                            goodActiveRankingBoxStr +=
+                                "<div class='col-sm-4 goodActiveRanking'>" +
+                                "   <img src='../images/sex"+twoRanking.sex+".png'  class='goodActiveImg'>" +
+                                "   <div class='goodActiveIcon'>" +
+                                "       <img src='../images/ranking2.png'>" +
+                                "   </div>" +
+                                "   <div>"+twoRanking.true_name+"</div>" +
+                                "   <div>"+twoRanking.avg_score+"分</div>" +
+                                "</div>" +
+                                "<div class='col-sm-4 goodActiveRanking oneRanking'>" +
+                                "   <img src='../images/sex"+oneRanking.sex+".png' class='goodActiveImg'>" +
+                                "   <div class='goodActiveIcon'>" +
+                                "       <img src='../images/ranking1.png' >" +
+                                "   </div>" +
+                                "   <div>"+oneRanking.true_name+"</div>" +
+                                "   <div>"+oneRanking.avg_score+"分</div>" +
+                                "</div>" +
+                                "<div class='col-sm-4 goodActiveRanking'>" +
+                                "   <img src='../images/sex"+threeRanking.sex+".png'  class='goodActiveImg'>" +
+                                "   <div class=\"goodActiveIcon\">" +
+                                "       <img src='../images/ranking3.png\'>" +
+                                "   </div>" +
+                                "   <div>"+threeRanking.true_name+"</div>" +
+                                "   <div>"+threeRanking.avg_score+"分</div>" +
+                                "</div>";
+                        //学科列表 end
+                        $("#goodActiveRankingBox").append(goodActiveRankingBoxStr);
+
+
+                    }
+
+                    //删除之前班级排名重新获取并添加到列表中；
+                    $("#selectRankingList").children().remove();
+                    var selectRankingListStr = "";
+                    //学科列表 start
+                    $.each(data.resultdata, function (index, item) {
+                        var sex=(item.sex=="1")?"男":(item.sex=="2")?"女":"未知";
+                        var index =index+1;
+                        selectRankingListStr +=
+                            "<tr>" +
+                            "   <td>"+index+"</td>" +
+                            "   <td>"+item.true_name+"</td>" +
+                            "   <td>"+sex+"</td>" +
+                            "   <td>"+item.put_count+"</td>" +
+                            "   <td>"+item.avg_score+"</td>" +
+                            "</tr>";
+
+
+                    });
+                    //学科列表 end
+                    $("#selectRankingList").append(selectRankingListStr);
+
+                    // 显示学生课堂信息
+                    $('#activeInfo').modal({keyboard: true});
+                    var _this = $('#beginsClassBtn');
+                    _this.removeClass('btn-danger').addClass('btn-primary');
+                    _this.attr("data-value", "3");
+                    _this.html("课程已结束");
+                }
+            }
+        });
+    }
+
+
+
+});
+
+//课程结束获取互动课堂学生排名 end
+
+//上课中结束 end

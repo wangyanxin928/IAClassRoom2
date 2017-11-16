@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<!--classHistory.html-->
+<!-- 上课记录 -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>上课记录</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body class="bg-white ">
+<header class=" bg-lightBlue text-white">
+    <div class="row ">
+        <div class="col-sm-1 col-xs-1   text-center returnBtn">
+            <span class=" glyphicon glyphicon-menu-left " onclick="javascript:window.history.back(-1);"></span>
+        </div>
+        <div class="col-xs-10 col-sm-10 text-center">课程记录</div>
+    </div>
+</header>
+<div id="activeInfo">
+    <div class="goodActiveInfo">
+        <div class="row">
+            <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-4 col-sm-offset-4 col-xs-offset-4 goodActiveRanking oneRanking">
+                        <img src="../images/womon.png" alt="" class="goodActiveImg">
+                        <!--<div class="goodActiveIcon"><img src="../images/ranking1.png" alt=""></div>-->
+                        <div>张莘涵&nbsp;老师</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="activeRankingList">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <table class="table table-bordered ">
+                    <thead >
+                    <tr >
+                        <th width="20" >序号</th>
+                        <th width="120" >班级</th>
+                        <th width="80" >学科</th>
+                        <th width="150" >时间</th>
+                        <th width="80" >提问次数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr><td>1</td><td>高三（1）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>30</td></tr>
+                    <tr><td>2</td><td>高三（2）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>30</td></tr>
+                    <tr><td>3</td><td>高三（1）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>50</td></tr>
+                    <tr><td>4</td><td>高三（2）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>33</td></tr>
+                    <tr><td>5</td><td>高三（2）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>46</td></tr>
+                    <tr><td>6</td><td>高三（1）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>30</td></tr>
+                    <tr><td>7</td><td>高三（2）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>37</td></tr>
+                    <tr><td>8</td><td>高三（1）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>35</td></tr>
+                    <tr><td>9</td><td>高三（2）班</td><td>物理</td><td>2017-11-09&nbsp;08:00-09:00</td><td>39</td></tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<script src="../js/common.js"></script>
+</body>
+<script>
+    window.onload = function(){
+        teacherClassHistory();
+    };
+</script>
+
+</html>

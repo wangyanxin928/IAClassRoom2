@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<!-- courseGradePage.html-->
+<!-- 选择学科 -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>选择学科</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/common.css">
+</head>
+
+<body class="bg-gray ">
+<header class=" bg-lightBlue text-white">
+    <div class="row ">
+        <div class="col-sm-1 col-xs-1   text-center returnBtn">
+            <span class=" glyphicon glyphicon-menu-left " onclick="javascript:window.history.back(-1);"></span>
+        </div>
+        <div class="col-xs-10 col-sm-10 text-center">选择学科</div>
+    </div>
+</header>
+
+<div class="container-fluid ">
+    <div class="row courseList" id="classGradeList">
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course1.png" alt="">-->
+                <!--<h4>数学</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course2.png" alt="">-->
+                <!--<h4>语文</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course3.png" alt="">-->
+                <!--<h4>物理</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course4.png" alt="">-->
+                <!--<h4>化学</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course5.png" alt="">-->
+                <!--<h4>生物</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course6.png" alt="">-->
+                <!--<h4>英语</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course7.png" alt="">-->
+                <!--<h4>地理</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course8.png" alt="">-->
+                <!--<h4>历史</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center"><div class="courseBtn"><img src="../images/course9.png" alt=""><h4>政治</h4></div></div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course12.png" alt="">-->
+                <!--<h4>体育</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course13.png" alt="">-->
+                <!--<h4>美术</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-4 col-sm-3 text-center">-->
+            <!--<div class="courseBtn">-->
+                <!--<img src="../images/course14.png" alt="">-->
+                <!--<h4>音乐</h4>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+
+</div>
+</body>
+<script src="../js/common.js"></script>
+<script>
+    window.onload = function(){
+        courseGradePage();
+    };
+</script>
+<script>
+//    $('.courseBtn ').click(function (e) {
+//        location = "groupingList.html";
+//    })
+</script>
+
+</html>
